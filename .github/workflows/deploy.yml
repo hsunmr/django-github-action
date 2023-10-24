@@ -62,9 +62,12 @@ jobs:
         with:
           name: test-artifacts
 
-      - name: Extract Code and Run Tests
+      - name: Extract Code
         run: |
           tar xzf test_artifacts.tar.gz
+
+      - name: Run Tests
+        run: |
           source .venv/bin/activate
           python3 manage.py test
           deactivate
