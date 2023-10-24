@@ -12,11 +12,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/Checkout@v2
-      - name: Set up Python 3.8
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.8
-      - name: Run project lint
+      - name: Python Syntax Check
         run: |
           pip3 install Flake8
           echo "Run flake8"
