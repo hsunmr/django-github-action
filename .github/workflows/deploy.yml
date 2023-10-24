@@ -43,9 +43,10 @@ jobs:
 
       - name: Package for Test
         run: |
-          mkdir /tmp/djagno_artifacts
-          cp -r . /tmp/djagno_artifacts
-          tar czf test_artifacts.tar.gz -C /tmp/djagno_artifacts .
+          mkdir /tmp/django_artifacts
+          cp -r . /tmp/django_artifacts
+          tar czf test_artifacts.tar.gz -C /tmp/django_artifacts .
+          rm -rf /tmp/django_artifacts
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
