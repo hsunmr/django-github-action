@@ -22,3 +22,49 @@ jobs:
           pip3 install Flake8
           echo "Run flake8"
           flake8 .
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/Checkout@v2
+
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install Dependencies
+        run: |
+          python3 -m venv .venv
+          source .venv/bin/active
+          pip3 install -r requirements.txt
+
+      - name: Package for Test
+        run: |
+          tar czf test_artifacts.tar.gz .
+          mv test_artifacts.tar.gz $GITHUB_WORKSPACE
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-artifacts
+          path: $GITHUB_WORKSPACE/test_artifacts.tar.gz
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: test-artifacts
+
+      - name: Extract Code and Virtual Environment
+        run: |
+          tar xzf test_artifacts.tar.gz
+          source .venv/bin/activate
+
+      - name: Run Tests
+        run: |
+          python manage.py test
