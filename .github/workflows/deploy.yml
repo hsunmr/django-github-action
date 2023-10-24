@@ -19,4 +19,5 @@ jobs:
       - name: Run project lint
         run: |
           pip3 install Flake8
+          echo "Run flake8"
           flake8 .
