@@ -46,13 +46,12 @@ jobs:
           mkdir /tmp/djagno_artifacts
           cp -r . /tmp/djagno_artifacts
           tar czf test_artifacts.tar.gz -C /tmp/djagno_artifacts .
-          mv test_artifacts.tar.gz $GITHUB_WORKSPACE
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
           name: test-artifacts
-          path: $GITHUB_WORKSPACE/test_artifacts.tar.gz
+          path: test_artifacts.tar.gz
 
   test:
     runs-on: ubuntu-latest
