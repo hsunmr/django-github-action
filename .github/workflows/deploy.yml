@@ -14,6 +14,7 @@ jobs:
         uses: actions/Checkout@v2
       - name: Python Syntax Check
         run: |
+          python -V
           pip3 install Flake8
           echo "Run flake8"
           flake8 .
