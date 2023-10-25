@@ -5,7 +5,11 @@
     - Check python syntax (flake8)
 - build
     - Install python dependencies
-    - Upload project artifacts
+    - Cache python dependencies
 - test
-    - Download project artifacts
+    - Restore cached python dependencies
     - Run test
+- package-release
+    - Upload project artifacts
+- deploy
+    - deploy
