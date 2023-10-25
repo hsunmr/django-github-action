@@ -5,6 +5,9 @@ on:
     branches:
       - master
 
+env:
+  _PATH_PACKAGE: ".venv"
+
 jobs:
 
   lint:
@@ -17,7 +20,7 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.8'
-      - name: Python Syntax Check
+      - name: Python syntax check
         run: |
           python3 -V
           pip3 install Flake8
@@ -31,28 +34,44 @@ jobs:
       - name: Checkout
         uses: actions/Checkout@v4
 
-      - name: Set up Python 3.8
+      - name: Set up python 3.8
         uses: actions/setup-python@v4
         with:
           python-version: '3.8'
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: |
-          pwd
           python3 -m venv .venv
           source .venv/bin/activate
           pip3 install -r requirements.txt
           deactivate
 
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          key: ${GITHUB_REF_NAME}-${GITHUB_JOB}
+          path: $_PATH_PACKAGE
 
   test:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Run Tests
+      - name: Checkout
+        uses: actions/Checkout@v4
+
+      - name: Set up python 3.8
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
+      - name: Restore cached dependencies for test job
+        uses: actions/cache@v3
+        with:
+          key: ${GITHUB_REF_NAME}-${GITHUB_JOB}
+          path: $_PATH_PACKAGE
+
+      - name: Run tests
         run: |
-          pwd
-          ls -al
           source .venv/bin/activate
           python3 manage.py test
           deactivate
