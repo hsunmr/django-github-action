@@ -1,15 +1,15 @@
 ### Django project github action implementation
 
 #### Jobs
-- lint
+- `lint`
     - Check python syntax (flake8)
-- build
+- `build`
     - Install python dependencies
     - Cache python dependencies
-- test
+- `test`
     - Restore cached python dependencies
     - Run test
-- package-release
+- `package-release`
     - Upload project artifacts
-- deploy
+- `deploy`
     - deploy
