@@ -5,9 +5,6 @@ on:
     branches:
       - master
 
-env:
-  _PATH_PACKAGE: ".venv"
-
 jobs:
 
   lint:
@@ -49,8 +46,8 @@ jobs:
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
-          key: test_cache
-          path: $_PATH_PACKAGE
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          path: .venv
 
   test:
     runs-on: ubuntu-latest
@@ -67,8 +64,8 @@ jobs:
       - name: Restore cached dependencies for test job
         uses: actions/cache@v3
         with:
-          key: test_cache
-          path: $_PATH_PACKAGE
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          path: .venv
 
       - name: Run tests
         run: |
