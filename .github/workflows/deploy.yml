@@ -41,18 +41,11 @@ jobs:
           pip3 install -r requirements.txt
           deactivate
 
-      - name: Package for Test
-        run: |
-          mkdir /tmp/django_artifacts
-          cp -r . /tmp/django_artifacts
-          tar czf test_artifacts.tar.gz -C /tmp/django_artifacts .
-          rm -rf /tmp/django_artifacts
-
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
           name: test-artifacts
-          path: test_artifacts.tar.gz
+          path: .
 
   test:
     runs-on: ubuntu-latest
@@ -62,10 +55,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: test-artifacts
-
-      - name: Extract Code
-        run: |
-          tar xzf test_artifacts.tar.gz
 
       - name: Run Tests
         run: |
