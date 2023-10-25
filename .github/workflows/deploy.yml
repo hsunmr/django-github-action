@@ -77,7 +77,7 @@ jobs:
     needs: test
     env:
       _REPO_NAME: ${{ github.event.repository.name }}
-      _PACKAGE_FILENAME: ${{ env._REPO_NAME }}_${{ github.ref_name }}_${{ github.sha }}.tgz
+      _PACKAGE_FILENAME: ${{ github.event.repository.name }}_${{ github.ref_name }}_${{ github.sha }}.tgz
 
     steps:
       - name: Checkout
