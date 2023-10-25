@@ -112,7 +112,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ${{ github.ref_name }}_${{ github.sha }}
-          path: $_PACKAGE_FILENAME
+          path: ${{ env._PACKAGE_FILENAME }}
 
   deploy:
     runs-on: ubuntu-latest
