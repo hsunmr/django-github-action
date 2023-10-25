@@ -102,10 +102,10 @@ jobs:
           echo $_ARCHIVE_FOLDER
           echo $_PACKAGE_FILENAME
 
-          rm -rf $_ARCHIVE_FOLDER
-          mkdir $_ARCHIVE_FOLDER
-          mv * .venv $_ARCHIVE_FOLDER
-          tar zcf $_PACKAGE_FILENAME $_ARCHIVE_FOLDER
+          rm -rf ~/$_ARCHIVE_FOLDER
+          mkdir ~/$_ARCHIVE_FOLDER
+          mv * .venv ~/$_ARCHIVE_FOLDER
+          tar zcf $_PACKAGE_FILENAME ~/$_ARCHIVE_FOLDER
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
