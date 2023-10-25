@@ -77,7 +77,7 @@ jobs:
     needs: test
     env:
       _REPO_NAME: ${{ github.event.repository.name }}
-      _PACKAGE_FILENAME: ${_REPO_NAME}_${{ github.ref_name }}_${{ github.sha }}.tgz
+      _PACKAGE_FILENAME: $_REPO_NAME_${{ github.ref_name }}_${{ github.sha }}.tgz
 
     steps:
       - name: Checkout
@@ -96,7 +96,7 @@ jobs:
 
       - name: Pack artifacts
         env:
-          _ARCHIVE_FOLDER: ${_REPO_NAME}_${{ github.ref_name }}
+          _ARCHIVE_FOLDER: $_REPO_NAME_${{ github.ref_name }}
         run: |
           echo $_REPO_NAME
           echo $_ARCHIVE_FOLDER
