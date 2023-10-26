@@ -10,6 +10,6 @@
     - Restore cached python dependencies
     - Run test
 - `package-release`
-    - Upload project artifacts
+    - Upload image to github container registry
 - `deploy`
     - deploy
